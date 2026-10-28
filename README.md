@@ -1,6 +1,6 @@
 # LineageOS 24.0 device tree: Xiaomi 18 Pro Max (`madrid`)
 
-**Status: early bring-up, NOT booted yet.** The system images build. Nothing has been flashed on
+**Status: early bring-up, NOT booted yet.** The system images build (first clean build 2026-10-28). Nothing has been flashed on
 hardware. Don't flash this on your daily phone.
 
 | | |
@@ -36,7 +36,7 @@ source build/envsetup.sh
 lunch lineage_madrid-cp2a-userdebug
 m systemimage systemextimage productimage
 ```
-Then repack `super` with `lpmake`: our system/system_ext/product plus the stock partitions from the
+Then repack `super` with `scripts/build_super.sh` (`lpmake`): our system/system_ext/product plus the stock partitions from the
 official fastboot ROM (`madrid_images_OS4.0.24.0.XEOCNXM_20261009.0000.00_17.0_cn_14998967e9.tgz`).
 Virtual A/B, 3 metadata slots, group `qti_dynamic_partitions` 18779996160 bytes, super 18790481920 bytes.
 
