@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- LineageOS 24.0 local manifest for the Xiaomi 18 Pro Max (madrid).
+     Put in .repo/local_manifests/madrid.xml -->
+<manifest>
+  <remote name="ironshing" fetch="https://github.com/IronShing" />
+  <project path="device/xiaomi/madrid" name="android_device_xiaomi_madrid" remote="ironshing" revision="lineage-24.0" />
+</manifest>
