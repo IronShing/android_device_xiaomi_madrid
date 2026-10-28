@@ -11,9 +11,16 @@ args=(--metadata-size 65536 --super-name super --metadata-slots 3 --virtual-ab
       --device super:$SUPER_SIZE
       --group qti_dynamic_partitions_a:$GROUP_SIZE --group qti_dynamic_partitions_b:$GROUP_SIZE)
 
+TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
+
 add() { # name image
-    local size; size=$(stat -c%s "$2")
-    args+=(--partition "$1_a:readonly:$size:qti_dynamic_partitions_a" --image "$1_a=$2"
+    local img=$2 size
+    # lpmake needs raw images; the build emits sparse ones
+    if [ "$(head -c4 "$img" | od -An -tx4 | tr -d ' ')" = "ed26ff3a" ]; then
+        simg2img "$img" "$TMP/$1.img"; img=$TMP/$1.img
+    fi
+    size=$(stat -c%s "$img")
+    args+=(--partition "$1_a:readonly:$size:qti_dynamic_partitions_a" --image "$1_a=$img"
            --partition "$1_b:readonly:0:qti_dynamic_partitions_b")
 }
 
